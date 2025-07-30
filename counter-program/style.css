@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f2f5;
+}
+
+.container {
+  text-align: center;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#count {
+  font-size: 60px;
+  margin: 20px 0;
+  color: #333;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#increment {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#decrement {
+  background-color: #f44336;
+  color: white;
+}
+
+#reset {
+  background-color: #555;
+  color: white;
+}
+
+.buttons button:hover {
+  opacity: 0.9;
+}
