@@ -14,7 +14,7 @@ form.addEventListener("submit", function (event) {
     if (!title) return; // If input is empty, exit
 
     // ✅ Build the API URL using ?t= for exact title search
-    const url = `http://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(title)}`;
+    const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(title)}`;
 
     // ✅ Fetch data from OMDB API
     fetch(url)
