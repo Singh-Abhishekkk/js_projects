@@ -8,24 +8,24 @@ const resultsContainer = document.getElementById("results");
 
 // ✅ Listen for form submission
 form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Stop the page from reloading
+    event.preventDefault(); // Stop page reload
 
-    const title = input.value.trim(); // Get text from input
-    if (!title) return; // If input is empty, exit
+    const title = input.value.trim(); // Get input text
+    if (!title) return;
 
-    // ✅ Build the API URL using ?t= for exact title search
+    // ✅ API URL with exact title search
     const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(title)}`;
 
-    // ✅ Fetch data from OMDB API
+    // ✅ Fetch movie data
     fetch(url)
-        .then(response => response.json()) // Convert response to JSON
-        .then(data => {
-            // ✅ Clear previous results
+        .then((response) => {
+            if (!response.ok) throw new Error("Network response failed");
+            return response.json();
+        })
+        .then((data) => {
             resultsContainer.innerHTML = "";
 
-            // ✅ If movie found
             if (data.Response === "True") {
-                // Create movie card HTML
                 const movieHTML = `
                     <div class="movie-card">
                         <img src="${data.Poster !== "N/A" ? data.Poster : 'https://via.placeholder.com/300x450?text=No+Image'}" alt="${data.Title}" />
@@ -37,17 +37,12 @@ form.addEventListener("submit", function (event) {
                         </div>
                     </div>
                 `;
-
-                // ✅ Inject the movie HTML into the results container
                 resultsContainer.innerHTML = movieHTML;
-
             } else {
-                // ✅ If movie not found or invalid title
                 resultsContainer.innerHTML = `<p class="error">Movie not found 😢</p>`;
             }
         })
-        .catch(err => {
-            // ✅ If fetch fails (e.g., no internet or API down)
+        .catch((err) => {
             console.error("Fetch error:", err);
             resultsContainer.innerHTML = `<p class="error">Something went wrong. Try again later.</p>`;
         });
